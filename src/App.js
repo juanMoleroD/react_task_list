@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 function App() {
 
   const [tasks, setTasks] = useState([
-    "Groceries", "Dog for a walk", "Call mom"
+    {title: "Call Mom", priority: "high"},
+    {title: "Buy Groceries", priority: "low"},
+    {title: "Walk the dogs", priority: "high"}
   ]);
 
   const [newTask, setNewTask] = useState("");
@@ -13,7 +15,7 @@ function App() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     let copyOfTasks = [...tasks];
-    copyOfTasks.push(newTask);
+    copyOfTasks.push({title: newTask, priority: newPriority});
     setTasks(copyOfTasks)
     setNewTask("")
   }
@@ -23,12 +25,14 @@ function App() {
   }
 
   let taskNodes = tasks.map((task, index) => {
-    return <li key={index}>{task}</li>;
+    return <li key={index}>{task.title} - {task.priority}</li>;
   })
 
   const handleHighPriorityInput = (event) => {
-    setNewPriority(event.target.priority.value)
+    setNewPriority(event.target.value)
+    console.log()
   }
+
 
 
 
@@ -38,9 +42,9 @@ function App() {
         <form>
           <label>Add new Task: </label>
           <input type="text" value={newTask} onChange={handleInput}/>
-          <input type="radio" name="priority" value="high" onClick={handleHighPriorityInput}/>
+          <input type="radio" name="priority" value="high" onChange={handleHighPriorityInput}/>
           <label htmlFor='priority'>High</label>
-          <input type="radio" name="priority" value="low"/>
+          <input type="radio" name="priority" value="low" onChange={handleHighPriorityInput} defaultChecked/>
           <label htmlFor="priority" >Low</label>
           <input type="submit" onClick={handleFormSubmit}/>
         </form>

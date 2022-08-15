@@ -25,7 +25,10 @@ function App() {
   }
 
   let taskNodes = tasks.map((task, index) => {
-    return <li key={index}>{task.title} - {task.priority}</li>;
+    return <li key={index} 
+    className={task.priority == "high" ? 
+      "high-priority" : "low-priority" }
+    >{task.title}</li>;
   })
 
   const handleHighPriorityInput = (event) => {
@@ -34,11 +37,9 @@ function App() {
   }
 
 
-
-
   return (
     <main className="App">
-      <nav>
+        <h1>Tasks</h1>
         <form>
           <label>Add new Task: </label>
           <input type="text" value={newTask} onChange={handleInput}/>
@@ -48,8 +49,7 @@ function App() {
           <label htmlFor="priority" >Low</label>
           <input type="submit" onClick={handleFormSubmit}/>
         </form>
-      </nav>
-      <br/>
+      <hr></hr>
       <section>
         <h1>Tasks: </h1>
         <ul>

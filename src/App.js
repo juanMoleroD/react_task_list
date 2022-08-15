@@ -26,9 +26,8 @@ function App() {
 
   let taskNodes = tasks.map((task, index) => {
     return <li key={index} 
-    className={task.priority == "high" ? 
-      "high-priority" : "low-priority" }
-    >{task.title}</li>;
+    className={task.priority+"-priority"}
+    >{task.title} <span></span></li>;
   })
 
   const handleHighPriorityInput = (event) => {
